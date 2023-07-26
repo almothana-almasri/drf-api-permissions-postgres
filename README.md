@@ -4,18 +4,21 @@ Author: **Almothana Almasri**
 
 ## Overview
 
-Use Django REST Framework to create an API, then “containerize” it with Docker.
-
-## SETUP
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+Let’s move our site closer to production grade by adding Permissions and Postgresql Database.
 
 ## RUN
 
 ```bash
-python manage.py runserver
+docker-compose up 
+```
+
+`CTRL +C` to quit
+
+## Configuration
+
+```bash
+docker-compose run web python manage.py createsuperuser
+docker-compose run web python manage.py makemigrations
+docker-compose run web python manage.py migrate  
+docker-compose run web python manage.py test
 ```
