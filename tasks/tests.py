@@ -35,7 +35,7 @@ class TaskTest(APITestCase):
         self.assertEqual(actual_desc, "This is a test task.")
 
     def test_get_task_list(self):
-        url = reverse("task-list")  # Change "task_list" to your actual view name
+        url = reverse("task-list") 
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         tasks = response.data
@@ -44,13 +44,13 @@ class TaskTest(APITestCase):
 
     def test_auth_required(self):
         self.client.logout()
-        url = reverse("task-list")  # Change "task_list" to your actual view name
+        url = reverse("task-list")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_only_owner_can_delete_task(self):
         self.client.logout()
         self.client.login(username="testuser2", password="pass2")
-        url = reverse("task-detail", args=[1])  # Change "task_detail" to your actual view name
+        url = reverse("task-detail", args=[1])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
